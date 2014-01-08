@@ -8,7 +8,7 @@ module ActiveMerchant #:nodoc:
       end
 
       def payment_url(options)
-        redirect_url     = Rails.env.development? ? nil : "#{Spree::Config.site_url}/pagseguro/callback"
+        redirect_url     = Rails.env.development? ? nil : "#{Spree::Config.site_url}/pagseguro/callback#{options[:order_id]}"
         notification_url = Rails.env.development? ? nil : "#{Spree::Config.site_url}/pagseguro/notify"
 
         payment = ::PagSeguro::Payment.new(options[:email], options[:token],
