@@ -1,80 +1,86 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Spree Pagseguro by jnettome</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
 
-	<title>jnettome/SpreePagSeguro @ GitHub</title>
-	
-	<style type="text/css">
-		body {
-  		margin-top: 1.0em;
-  		background-color: #40e784;
-		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-		h1 { font-size: 3.8em; color: #bf187b; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #bf187b; }
-    h3 { text-align: center; color: #bf187b; }
-    a { color: #bf187b; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-	</style>
-	
-</head>
+      <header>
+        <h1>Spree Pagseguro</h1>
+        <p>Add support for Pagseguro checkout as a payment method</p>
+      </header>
 
-<body>
-  <a href="http://github.com/jnettome/SpreePagSeguro"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+      <div id="banner">
+        <span id="logo"></span>
 
-  <div id="container">
+        <a href="https://github.com/jnettome/spree_pagseguro" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/jnettome/spree_pagseguro/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/jnettome/spree_pagseguro/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
 
-    <div class="download">
-      <a href="http://github.com/jnettome/SpreePagSeguro/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/jnettome/SpreePagSeguro/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="spree-pagseguro-brazilian-gateway" class="anchor" href="#spree-pagseguro-brazilian-gateway"><span class="octicon octicon-link"></span></a>Spree Pagseguro (Brazilian Gateway)</h1>
+
+<p>Add support for Pagseguro checkout as a payment method.
+<strong>Only tested on Spree 2.1.3</strong></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<ol>
+<li>Add the following to your Gemfile</li>
+</ol><pre>
+    gem 'spree_pagseguro', github: 'jnettome/spree_pagseguro'
+</pre>
+
+<ol>
+<li><p>Run <code>bundle install</code></p></li>
+<li><p>To copy and apply migrations run: <code>rails g spree_pagseguro:install</code></p></li>
+</ol><h2>
+<a name="configuring" class="anchor" href="#configuring"><span class="octicon octicon-link"></span></a>Configuring</h2>
+
+<ol>
+<li><p>Add a new Payment Method, using: <code>BillingIntegration::Pagseguro::Checkout</code> as the <code>Provider</code></p></li>
+<li><p>Click <code>Create</code>, and enter your Store's Pagseguro Email and Token in the fields provided.</p></li>
+<li><p><code>Save</code> and enjoy!</p></li>
+</ol><h2>
+<a name="testing" class="anchor" href="#testing"><span class="octicon octicon-link"></span></a>Testing</h2>
+
+<p>Be sure to add the rspec-rails gem to your Gemfile and then create a dummy test app for the specs to run against.</p>
+
+<pre><code>$ bundle exec rake test app
+$ bundle exec rspec spec
+</code></pre>
+
+<p>Copyright (c) 2012-2014 João Netto, released under the New BSD License</p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/jnettome">jnettome</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
     </div>
-
-    <h1><a href="http://github.com/jnettome/SpreePagSeguro">spree-pagseguro</a>
-      <span class="small">by <a href="http://github.com/jnettome">jnettome</a></span></h1>
-
-    <div class="description">
-      Implementação do PagSeguro ao SpreeCommerce
-    </div>
-
-    <h2>Authors</h2>
-<p>João Netto (hi@joaonetto.me)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>João Netto (hi@joaonetto.me)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/jnettome/SpreePagSeguro/zipball/master">zip</a> or
-      <a href="http://github.com/jnettome/SpreePagSeguro/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/jnettome/SpreePagSeguro</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/jnettome/SpreePagSeguro">jnettome/SpreePagSeguro</a>
-    </div>
-
-  </div>
-
-  
-</body>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
 </html>
