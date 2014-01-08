@@ -1,7 +1,7 @@
 # Spree Pagseguro (Brazilian Gateway)
 
 Add support for Pagseguro checkout as a payment method.
-__Only tested on spree 2.1.3__
+__Only tested on Spree 2.1.3__
 
 ## Installation
 
@@ -13,7 +13,7 @@ __Only tested on spree 2.1.3__
 
 2. Run `bundle install`
 
-3. To copy and apply migrations run: `rails g spree_skrill:install`
+3. To copy and apply migrations run: `rails g spree_pagseguro:install`
 
 ## Configuring
 
