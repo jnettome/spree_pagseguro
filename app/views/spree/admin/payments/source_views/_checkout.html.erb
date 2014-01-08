@@ -1,0 +1,33 @@
+<fieldset>
+  <legend><%= t('pagseguro') %></legend>
+
+  <table class="index">
+    <tr>
+      <th colspan="6"><%= t('pagseguro_transaction') %></th>
+    </tr>
+    <tr>
+      <td><label><%= t("email") %>:</label></td>
+      <td>
+        <%= payment.source.email %>
+      </td>
+    </tr>
+    <tr>
+      <td><label><%= t("pagseguro_params") %>:</label></td>
+      <td>
+        <%= payment.source.params %>
+      </td>
+    </tr>
+    <tr>
+      <td><label><%= t("pagseguro_transaction_id") %>:</label></td>
+      <td>
+        <%= payment.source.transaction_id %>
+      </td>
+    </tr>
+    <tr>
+      <td><label><%= t("pagseguro_amount") %>:</label></td>
+      <td>
+        <%= payment.source.amount %>
+      </td>
+    </tr>
+  </table>
+</fieldset>
