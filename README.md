@@ -27,6 +27,7 @@ __Only tested on Spree 2.1.3__
 Testing
 -------
 
+To make real tests (pagseguro doesn't provide sandbox), before running tests set environment variables `SPREE_PAGSEGURO_EMAIL` and `SPREE_PAGSEGURO_TOKEN` with valid credentials. To generate a token [see this](https://pagseguro.uol.com.br/integracao/token-de-seguranca.jhtml).
 Be sure to add the rspec-rails gem to your Gemfile and then create a dummy test app for the specs to run against.
 
     $ bundle exec rake test app

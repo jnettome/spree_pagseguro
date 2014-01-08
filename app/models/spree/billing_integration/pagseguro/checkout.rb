@@ -27,10 +27,10 @@ module Spree
 
       options[:order_id] = order.number
 
-      options[:email] = preferences[:email]
-      options[:token] = preferences[:token]
+      options[:email] = (Rails.env.development? || Rails.env.test?) ? ENV['SPREE_PAGSEGURO_EMAIL'] : preferences[:email]
+      options[:token] = (Rails.env.development? || Rails.env.test?) ? ENV['SPREE_PAGSEGURO_TOKEN'] : preferences[:token]
 
-      pagseguro = self.provider.request_payment(options)
+      pagseguro = self.provider.payment_url(options)
 
       transaction = PagseguroTransaction.create(code: pagseguro.code)
       pagseguro.checkout_payment_url
