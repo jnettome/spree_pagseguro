@@ -1,12 +1,17 @@
 <p data-hook="pagseguro_checkout"></p>
 
-<% if @order.payment_method %>
-  <% if @order.payment_method.instance_of? Spree::BillingIntegration::Pagseguro::Checkout %>
-    <% if @order.payment.completed? %>
-      Seu pagamento foi aprovado pelo PagSeguro através da transação #<%= Spree::PagseguroTransactions.find_by_order_id(@order.id).transaction_id if Spree::PagseguroTransactions.find_by_order_id(@order.id) %>
+<%
+  payment_method = Spree::PaymentMethod.where(type: 'Spree::BillingIntegration::Pagseguro::Checkout').first
+  if payment_method && payment = @order.payments.find_by(state: 'checkout', payment_method_id: payment_method.id)
+    if payment.completed?
+    %>
+      Seu pagamento foi aprovado pelo PagSeguro através da transação #<%= Spree::PagseguroTransaction.find_by_order_id(@order.id.to_s).transaction_id if Spree::PagseguroTransaction.find_by_order_id(@order.id.to_s) %>
     <% else %>
-      Clique na imagem abaixo para realizar o pagamento através do Pagseguro.
-      <%= link_to "Pagar agora", Spree::BillingIntegration::Pagseguro::Checkout.payment_url(Spree::PagseguroTransactions.find_by_order_id(@order.id).code) %>
+      <%= link_to "Pagar agora com PagSeguro", Spree::BillingIntegration::Pagseguro::Checkout.payment_url(Spree::PagseguroTransaction.find_by_order_id(@order.id.to_s).code) %>
+      <script>
+      $(function() {
+        $("#checkout_form_payment .form-buttons").hide();
+      });
+      </script>
     <% end %>
-  <% end %>
 <% end %>

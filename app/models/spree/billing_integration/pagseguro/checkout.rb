@@ -40,11 +40,11 @@ module Spree
     end
 
     def self.notification(email, token, code)
-      self.provider.notification(email, token, code)
+      ActiveMerchant::Billing::Pagseguro.notification(email, token, code)
     end
 
     def self.payment_url(code)
-      self.provider.checkout_payment_url(code)
+      ActiveMerchant::Billing::Pagseguro.checkout_payment_url(code)
     end
   end
 end
