@@ -7,9 +7,7 @@ __Only tested on Spree 2.1.3__
 
 1. Add the following to your Gemfile
 
-<pre>
     gem 'spree_pagseguro', github: 'jnettome/spree_pagseguro'
-</pre>
 
 2. Run `bundle install`
 
@@ -22,6 +20,12 @@ __Only tested on Spree 2.1.3__
 2. Click `Create`, and enter your Store's Pagseguro Email and Token in the fields provided.
 
 3. `Save` and enjoy!
+
+## Running live
+
+For spree_pagseguro works as expected, we need to use master branch of `heavenstudio/pag_seguro`. Because the last versions wasn't released yet, force on your main spree application Gemfile the following:
+
+    gem 'pag_seguro', github: 'heavenstudio/pag_seguro', branch: 'master'
 
 
 Testing

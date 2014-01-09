@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '2.1.3'
   s.summary     = 'Add support for Pagseguro checkout as a payment method.'
   s.description = s.summary
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.0.0'
 
   s.author    = 'João Netto'
   s.email     = 'hi@joaonetto.me'

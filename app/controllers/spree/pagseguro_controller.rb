@@ -1,5 +1,7 @@
 module Spree
   class PagseguroController < Spree::StoreController
+    skip_before_action :verify_authenticity_token, only: :notify
+
     def callback
       @order = Spree::Order.find_by_number(params[:order])
 
