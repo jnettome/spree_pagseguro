@@ -17,7 +17,7 @@ module Spree
       pagseguro_transaction.transaction_id = notification.transaction_id
       pagseguro_transaction.customer_id = notification_code # Todo refactor column name
       pagseguro_transaction.status = 'paid' if notification.approved?
-      pagseguro.save!
+      pagseguro_transaction.save!
 
       notification
     end
