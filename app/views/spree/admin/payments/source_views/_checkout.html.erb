@@ -1,3 +1,5 @@
+<% Spree::PagseguroTransaction.where(order_id: @order.id.to_s).each do |transaction| %>
+
 <fieldset>
   <legend><%= t('pagseguro') %></legend>
 
@@ -8,26 +10,28 @@
     <tr>
       <td><label><%= t("email") %>:</label></td>
       <td>
-        <%= payment.source.email %>
+        <%= transaction.email %>
       </td>
     </tr>
     <tr>
       <td><label><%= t("pagseguro_params") %>:</label></td>
       <td>
-        <%= payment.source.params %>
+        <%= transaction.params %>
       </td>
     </tr>
     <tr>
       <td><label><%= t("pagseguro_transaction_id") %>:</label></td>
       <td>
-        <%= payment.source.transaction_id %>
+        <%= transaction.transaction_id %>
       </td>
     </tr>
     <tr>
       <td><label><%= t("pagseguro_amount") %>:</label></td>
       <td>
-        <%= payment.source.amount %>
+        <%= transaction.amount %>
       </td>
     </tr>
   </table>
 </fieldset>
+
+<% end %>
