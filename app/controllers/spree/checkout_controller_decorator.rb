@@ -10,8 +10,8 @@ module Spree
 
       payment_method = PaymentMethod.find(params[:order][:payments_attributes].first[:payment_method_id])
       if payment_method.kind_of?(BillingIntegration::Pagseguro::Checkout)
+        @order.payments.create(:amount => @order.total, :payment_method_id => payment_method.id)
         redirect_to payment_method.redirect_url(@order)
-        # @order.payments.create(:amount => @order.total, :payment_method_id => payment_method.id)
       end
     end
 

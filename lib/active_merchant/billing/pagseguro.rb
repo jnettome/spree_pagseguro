@@ -36,6 +36,14 @@ module ActiveMerchant #:nodoc:
         payment
       end
 
+      def self.notification(email, token, notification_code)
+        ::PagSeguro::Notification.new(email, token, notification_code)
+      end
+
+      def self.checkout_payment_url(code)
+        ::PagSeguro::Payment.checkout_payment_url(code)
+      end
+
     end
   end
 end

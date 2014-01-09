@@ -36,13 +36,15 @@ module Spree
         email: order.email, amount: order.total, order_id: order.id, code: pagseguro.code,
         status: 'pending')
 
-      # Fields that needed to be updated
-      # t.string :transaction_id
-      # t.string :customer_id
-      # t.text :params
-      # t.string :status
-
       pagseguro.checkout_payment_url
+    end
+
+    def self.notification(email, token, code)
+      self.provider.notification(email, token, code)
+    end
+
+    def self.payment_url(code)
+      self.provider.checkout_payment_url(code)
     end
   end
 end

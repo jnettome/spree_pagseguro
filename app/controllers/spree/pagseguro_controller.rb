@@ -1,27 +1,22 @@
 module Spree
   class PagseguroController < ApplicationController
     def callback
-      order = Spree::Order.find_by_number(params[:order])
+      @order = Spree::Order.find_by_number(params[:order])
 
       pagseguro_transaction = PagseguroTransaction.find_by_order_id(order.id.to_s)
       pagseguro_transaction.update_attribute :status, 'waiting'
 
-      redirect_to order_path(id: params[:order])
+      redirect_to completion_route
     end
 
     def notify
-      notification = Spree::PaymentNotification.update_last_transaction(params)
+      notification = Spree::PagseguroTransaction.update_last_transaction(params)
+      @order = Spree::Order.find(notification.id)
 
       if notification.approved?
-        Spree::Order.transaction do
-          @order = Spree::Order.find(notification.id)
-          @order.payment.complete!
-        end
+        @order.payment.complete!
       else
-        Spree::Order.transaction do
-          @order = Spree::Order.find(notification.id)
-          @order.payment.failure!
-        end
+        @order.payment.failure!
       end
 
       render nothing: true, head: :ok

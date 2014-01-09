@@ -1,5 +1,7 @@
 module Spree
   class PagseguroTransaction < ActiveRecord::Base
+    has_many :payments, :as => :source
+
     def actions
       []
     end
@@ -8,7 +10,7 @@ module Spree
       method = Spree::PaymentMethod.where(type: 'Spree::BillingIntegration::Pagseguro::Checkout').first
 
       notification_code = params[:notificationCode]
-      notification = ::PagSeguro::Notification.new(method.preferred_email, method.preferred_token, notification_code)
+      notification = Spree::BillingIntegration::Pagseguro::Checkout.notification(method.preferred_email, method.preferred_token, notification_code)
 
       pagseguro_transaction = self.find_by_order_id(notification.id)
       pagseguro_transaction.params = params
