@@ -7,7 +7,7 @@ module Spree
       pagseguro_transaction = PagseguroTransaction.find_by_order_id(@order.id.to_s)
       pagseguro_transaction.update_attribute :status, 'waiting'
 
-      payment = @order.payments.where(:state => "pending",
+      payment = @order.payments.where(:state => "checkout",
                                       :payment_method_id => payment_method.id).first
       payment.pend!
 
