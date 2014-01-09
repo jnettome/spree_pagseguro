@@ -1,10 +1,12 @@
 <p data-hook="pagseguro_checkout"></p>
 
-<% if @order.payment_method.instance_of? Spree::BillingIntegration::Pagseguro::Checkout %>
-  <% if @order.payment.completed? %>
-    Seu pagamento foi aprovado pelo PagSeguro através da transação #<%= Spree::PagseguroTransactions.find_by_order_id(@order.id).transaction_id if Spree::PagseguroTransactions.find_by_order_id(@order.id) %>
-  <% else %>
-    Clique na imagem abaixo para realizar o pagamento através do Pagseguro.
-    <%= link_to "Pagar agora", Spree::BillingIntegration::Pagseguro::Checkout.payment_url(Spree::PagseguroTransactions.find_by_order_id(@order.id).code) %>
+<% if @order.payment_method %>
+  <% if @order.payment_method.instance_of? Spree::BillingIntegration::Pagseguro::Checkout %>
+    <% if @order.payment.completed? %>
+      Seu pagamento foi aprovado pelo PagSeguro através da transação #<%= Spree::PagseguroTransactions.find_by_order_id(@order.id).transaction_id if Spree::PagseguroTransactions.find_by_order_id(@order.id) %>
+    <% else %>
+      Clique na imagem abaixo para realizar o pagamento através do Pagseguro.
+      <%= link_to "Pagar agora", Spree::BillingIntegration::Pagseguro::Checkout.payment_url(Spree::PagseguroTransactions.find_by_order_id(@order.id).code) %>
+    <% end %>
   <% end %>
 <% end %>
