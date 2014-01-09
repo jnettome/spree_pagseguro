@@ -12,7 +12,7 @@ module Spree
       if payment_method.kind_of?(BillingIntegration::Pagseguro::Checkout)
         pagseguro_checkout_url = payment_method.redirect_url(@order)
 
-        @order.payments.create(:amount => @order.total, :payment_method_id => payment_method.id)
+        @order.payments.create(:state = 'pending', :amount => @order.total, :payment_method_id => payment_method.id)
         redirect_to pagseguro_checkout_url
       end
     end
