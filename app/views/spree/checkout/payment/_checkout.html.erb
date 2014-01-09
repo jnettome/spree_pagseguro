@@ -1,1 +1,5 @@
-<p data-hook="pagseguro_checkout">Pagseguro</p>
+<p data-hook="pagseguro_checkout"></p>
+
+<% if @order.completed? %>
+  Pago com Pagseguro
+<% end %>

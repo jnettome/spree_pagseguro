@@ -27,12 +27,21 @@ module Spree
 
       options[:order_id] = order.number
 
-      options[:email] = (Rails.env.development? || Rails.env.test?) ? ENV['SPREE_PAGSEGURO_EMAIL'] : preferences[:email]
-      options[:token] = (Rails.env.development? || Rails.env.test?) ? ENV['SPREE_PAGSEGURO_TOKEN'] : preferences[:token]
+      options[:email] = (Rails.env.test?) ? ENV['SPREE_PAGSEGURO_EMAIL'] : preferences[:email]
+      options[:token] = (Rails.env.test?) ? ENV['SPREE_PAGSEGURO_TOKEN'] : preferences[:token]
 
       pagseguro = self.provider.payment_url(options)
 
-      transaction = PagseguroTransaction.create(code: pagseguro.code)
+      transaction = PagseguroTransaction.create!(
+        email: order.email, amount: order.total, order_id: order.id, code: pagseguro.code,
+        status: 'pending')
+
+      # Fields that needed to be updated
+      # t.string :transaction_id
+      # t.string :customer_id
+      # t.text :params
+      # t.string :status
+
       pagseguro.checkout_payment_url
     end
   end
