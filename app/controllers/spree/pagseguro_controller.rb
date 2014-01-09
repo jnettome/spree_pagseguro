@@ -9,7 +9,7 @@ module Spree
 
       payment = @order.payments.where(:state => "pending",
                                       :payment_method_id => payment_method.id).first
-      payment.pend
+      payment.pend!
 
       redirect_to completion_route
     end
