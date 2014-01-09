@@ -1,17 +1,12 @@
 module Spree
-  class PagseguroController < ApplicationController
+  class PagseguroController < Spree::StoreController
     def callback
       @order = Spree::Order.find_by_number(params[:order])
-      payment_method = Spree::PaymentMethod.where(type: 'Spree::BillingIntegration::Pagseguro::Checkout').first
 
-      pagseguro_transaction = PagseguroTransaction.find_by_order_id(@order.id.to_s)
+      pagseguro_transaction = Spree::PagseguroTransaction.find_by_order_id(@order.id.to_s)
       pagseguro_transaction.update_attribute :status, 'waiting'
 
-      payment = @order.payments.where(:state => "checkout",
-                                      :payment_method_id => payment_method.id).first
-      payment.pend!
-
-      redirect_to completion_route
+      redirect_to spree.order_path(@order)
     end
 
     def notify
@@ -20,7 +15,7 @@ module Spree
 
       @order = Spree::Order.find(notification.id)
       payment = @order.payments.where(:state => "pending",
-                                      :payment_method_id => payment_method.id).first
+                                      :payment_method_id => payment_method.id).last
 
       if notification.approved?
         payment.complete!
