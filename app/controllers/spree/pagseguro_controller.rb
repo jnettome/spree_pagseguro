@@ -12,6 +12,9 @@ module Spree
     end
 
     def notify
+      logger.info "[PAGSEGURO] Gateway is calling /notify"
+      logger.info params
+
       notification = Spree::PagseguroTransaction.update_last_transaction(params)
       payment_method = Spree::PaymentMethod.where(type: 'Spree::BillingIntegration::Pagseguro::Checkout').first
 
@@ -20,8 +23,10 @@ module Spree
                                       :payment_method_id => payment_method.id).last
 
       if notification.approved?
+        logger.info "[PAGSEGURO] Order #{@order.number} approved"
         payment.complete!
       else
+        logger.info "[PAGSEGURO] Order #{@order.number} failed"
         payment.failure!
       end
 
