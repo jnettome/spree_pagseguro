@@ -18,8 +18,8 @@ module Spree
       notification = Spree::PagseguroTransaction.update_last_transaction(params)
       payment_method = Spree::PaymentMethod.where(type: 'Spree::BillingIntegration::Pagseguro::Checkout').first
 
-      @order = Spree::Order.find(notification.id)
-      payment = @order.payments.where(:state => "pending",
+      @order = Spree::Order.find_by_number(notification.reference)
+      payment = @order.payments.where(:state => "checkout",
                                       :payment_method_id => payment_method.id).last
 
       if notification.approved?
