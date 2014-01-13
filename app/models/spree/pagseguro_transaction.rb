@@ -12,6 +12,8 @@ module Spree
       notification_code = params[:notificationCode]
       notification = Spree::BillingIntegration::Pagseguro::Checkout.notification(method.preferred_email, method.preferred_token, notification_code)
 
+      puts notification.inspect
+
       pagseguro_transaction = self.find_by_order_id(notification.id)
       pagseguro_transaction.params = params
       pagseguro_transaction.transaction_id = notification.transaction_id
