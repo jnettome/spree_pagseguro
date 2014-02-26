@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+MetricFu::Configuration.run do |config|
+  config.configure_metrics.each do |metric|
+    metric.enabled = false
+  end
+
+  config.configure_metric(:rcov) do |rcov|
+    rcov.enabled = true
+  end
+
+  config.configure_metric(:cane) do |cane|
+    cane.enabled = true
+    cane.abc_max = 15
+    cane.line_length = 90
+    cane.no_doc = 'y'
+    cane.no_readme = 'y'
+  end
+
+  config.configure_metric(:flay) do |flay|
+    flay.enabled = true
+  end
+
+  config.configure_metric(:flog) do |flog|
+    flog.enabled = true
+  end
+
+  config.configure_formatter(:html)
+end
